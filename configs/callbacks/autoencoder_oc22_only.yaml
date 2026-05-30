@@ -1,0 +1,18 @@
+defaults:
+  - model_checkpoint
+  - early_stopping
+  - rich_progress_bar
+  - ema
+  - _self_
+
+model_checkpoint:
+  dirpath: ${paths.output_dir}/checkpoints
+  filename: "vae-epoch@{epoch}-step@{step}-val_oc22_match_rate@{val_oc22/match_rate:.4f}"
+  monitor: "val_oc22/match_rate"
+  mode: "max"
+  save_last: True
+
+early_stopping:
+  monitor: "val_oc22/loss"
+  mode: "min"
+  patience: 5

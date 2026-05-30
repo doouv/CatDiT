@@ -1,0 +1,14 @@
+_target_: src.models.decoders.equivariant_feedforward.FeedForwardDecoder
+
+# To be used with equiformer encoder
+max_num_elements: ${encoder.max_num_elements}
+sphere_channels: ${encoder.sphere_channels}
+ffn_hidden_channels: ${encoder.ffn_hidden_channels}
+lmax_list: ${encoder.lmax_list}
+mmax_list: ${encoder.mmax_list}
+grid_resolution: ${encoder.grid_resolution}
+ffn_activation: ${encoder.ffn_activation}
+use_gate_act: ${encoder.use_gate_act}
+use_grid_mlp: ${encoder.use_grid_mlp}
+use_sep_s2_act: ${encoder.use_sep_s2_act}
+weight_init: ${encoder.weight_init}

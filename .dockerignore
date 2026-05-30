@@ -1,0 +1,15 @@
+# keep the build context small — mirror what we don't ship
+logs/
+wandb/
+models/
+pretrained_models/
+data/
+figure/
+figures*/
+*.png
+*.extxyz
+*.log
+__pycache__/
+*.pyc
+.git/
+.ipynb_checkpoints/

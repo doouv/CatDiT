@@ -1,0 +1,2 @@
+# empty logger config — used to disable all loggers
+# usage: python src/generate_samples.py logger=none

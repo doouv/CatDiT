@@ -1,0 +1,19 @@
+defaults:
+  - ema
+  - model_checkpoint
+  - early_stopping
+  - rich_progress_bar
+  - learning_rate_monitor
+  - _self_
+
+model_checkpoint:
+  dirpath: ${paths.output_dir}/checkpoints
+  filename: "ldm-epoch@{epoch}-step@{step}-val_oc20_struct_valid_rate@{val_oc20/struct_valid_rate:.4f}"
+  monitor: "val_oc20/struct_valid_rate"
+  mode: "max"
+  save_last: True
+
+early_stopping:
+  monitor: "val_oc20/struct_valid_rate"
+  patience: 100
+  mode: "max"

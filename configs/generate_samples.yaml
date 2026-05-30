@@ -1,0 +1,46 @@
+# @package _global_
+
+defaults:
+  - paths: default
+  - hydra: default
+  - extras: default
+  - logger: wandb
+  - _self_
+
+# Always required
+ckpt_path: ""   # path to LDM checkpoint (e.g. "models/ldm/CatDiT-C.ckpt")
+autoencoder_ckpt: ""   # path to VAE checkpoint (e.g. "models/vae/VAE-L.ckpt")
+task_name: "generate_samples"
+name: ""      # e.g. CatDiT_A=77
+tags: ["generation", "conditional"]
+seed: 42
+
+# Sampling parameters
+sampling:
+  dataset: "both"  # or "oc20", "oc22", "both"
+  num_samples: 10
+  batch_size: 100
+  cfg_scale: 2.0
+  save_dir: ${paths.output_dir}/generated
+  data_dir: ${paths.data_dir}
+  visualize: true
+  compute_novelty: false
+
+# Conditional generation
+conditional_generation:
+  binding_energy:
+    use: False
+    value: null
+  ads_id: 
+    use: False
+    value: null
+  cat_class:
+    use: False
+    value: null
+
+# override wandb task name
+logger:
+  wandb:
+    name: "${name}_${sampling.dataset}"
+    tags: ["generation"]
+    project: "Generate_samples"

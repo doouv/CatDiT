@@ -1,0 +1,31 @@
+# @package _global_
+
+# specify here default configuration
+# order of defaults determines the order in which configs override each other
+defaults:
+  - data: joint
+  - diffusion_module: ldm
+  - callbacks: diffusion_oc20_only.yaml
+  - logger: wandb # set logger here or use command line (e.g. `python train.py logger=tensorboard`)
+  - trainer: ddp
+  - paths: default
+  - extras: default
+  - hydra: default
+  - _self_
+
+# run name, eg. for wandb logging
+name: ""
+
+# task name, determines output directory path
+task_name: "eval_diffusion"
+
+# tags to help you identify your experiments
+# you can overwrite this in experiment configs
+# overwrite from command line with `python train.py tags="[first_tag, second_tag]"`
+tags: ["joint", "diffusion", "eval"]
+
+# provide checkpoint path to evaluate
+ckpt_path: ""
+
+# seed for random number generators in pytorch, numpy and python.random
+seed: 9

@@ -1,0 +1,11 @@
+defaults:
+  - model_checkpoint
+  - rich_progress_bar
+  - _self_
+
+model_checkpoint:
+  dirpath: ${paths.output_dir}/checkpoints
+  filename: "vae-epoch@{epoch}-step@{step}-val_oc20_match_rate@{val_oc20/match_rate:.4f}"
+  monitor: "val_oc20/match_rate"
+  mode: "max"
+  save_last: True

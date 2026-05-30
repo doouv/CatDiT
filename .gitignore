@@ -1,0 +1,62 @@
+# ============================================================
+# Whitelist .gitignore: ignore everything, then re-include only
+# what should be tracked. Add/remove `!` lines as needed.
+# ============================================================
+
+# 1) ignore every top-level entry
+/*
+
+# 2) re-include directories to track
+!/src/
+!/configs/
+!/images/
+!/notebooks/
+!/scripts/
+!/data/
+
+# 3) re-include individual files
+!/README.md
+!/setup.sh
+!/Dockerfile
+!/.dockerignore
+!/.gitignore
+!/.project-root
+
+# ============================================================
+# Per-directory rules (whitelisted dirs still need pruning)
+# ============================================================
+
+# data/: only the small bincount tensors, drop the OC20/OC22 datasets
+/data/**
+!/data/**/
+!/data/**/num_nodes_bincount.pt
+
+# scripts/: only shell + python, no logs/outputs
+/scripts/*
+!/scripts/*.sh
+
+# /src/: only directories + training/relaxation scripts
+/src/*
+!/src/callbacks/
+!/src/data/
+!/src/models/
+!/src/tools/
+!/src/utils/
+!/src/eval/
+!/src/generate_samples.py
+!/src/train_autoencoder.py
+!/src/train_diffusion.py
+!/src/eval_autoencoder.py
+!/src/eval_diffusion.py
+!/src/7net_relaxation.py
+!/src/__init__.py
+
+# notebooks/: only the demo (drop scratch/analysis notebooks)
+/notebooks/*
+!/notebooks/catdit_demo.ipynb
+
+# always drop these anywhere
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store

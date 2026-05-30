@@ -1,0 +1,81 @@
+program: src/generate_samples.py
+
+method: grid
+
+metric:
+  goal: maximize
+  name: generation/valid_rate
+
+parameters:
+
+  hydra.run.dir:
+    value: "logs/sweep/run_${now:%Y-%m-%d}/ads_${conditional_generation.ads_id.value}"
+
+  seed:
+    value: 42
+
+  ckpt_path:
+    value: ""
+
+  # Sampling settings
+  ++sampling.dataset:
+    value: "oc20"
+
+  ++sampling.num_samples:
+    value: 500
+
+  ++sampling.batch_size:
+    value: 100
+
+  ++sampling.cfg_scale:
+    value: 4.0
+
+  ++sampling.visualize:
+    value: true
+
+  ++sampling.save_dir:
+    value: "${hydra:runtime.output_dir}/generated"
+
+  ++sampling.compute_novelty:
+    value: false
+
+  # Conditional generation - ads_id sweep
+  ++conditional_generation.ads_id.use:
+    value: true
+
+  ++conditional_generation.ads_id.value:
+    values: [
+      0, 1, 2, 3, 4, 9,
+      10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+      20, 21, 22, 23, 24, 25, 26, 27, 29,
+      30, 31, 32, 33, 34, 35, 38, 39,
+      40, 42, 44, 45, 46, 47, 48, 49,
+      50, 51, 52, 53, 54, 55, 56, 57, 59,
+      60, 62, 63, 65, 67, 68, 69,
+      70, 72, 73, 74, 75, 76, 77, 78, 79,
+      81
+    ]  # for existing 64 adsorbate types
+
+  ++conditional_generation.binding_energy.use:
+    value: false
+
+  ++conditional_generation.cat_class.use:
+    value: false
+
+  # Logger
+  name:
+    value: "sweep@${conditional_generation.ads_id.value}"
+
+  ++logger.wandb.project:
+    value: "CatDiT-sweep"
+
+  ++logger.wandb.name:
+    value: "ADS@${conditional_generation.ads_id.value}"
+
+command:
+  - ${env}
+  - HYDRA_FULL_ERROR=1
+  - WANDB_START_METHOD=thread
+  - python
+  - ${program}
+  - ${args_no_hyphens}

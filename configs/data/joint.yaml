@@ -1,0 +1,32 @@
+datamodule:
+  _target_: src.data.joint_datamodule.JointDataModule
+
+  datasets:
+    OC20s2ef:
+      root: ${paths.data_dir}/oc20/s2ef
+      proportion: 0.0
+
+    OC20is2re:
+      root: ${paths.data_dir}/oc20/is2re
+      proportion: 0.0
+    OC22s2ef:
+      root: ${paths.data_dir}/oc22/s2ef
+      proportion: 0.0
+
+    OC22is2re:
+      root: ${paths.data_dir}/oc22/is2re
+      proportion: 0.0
+
+  batch_size:
+    train: 20
+    val: 20
+    test: 20
+
+  num_workers:
+    train: 8
+    val: 8
+    test: 8
+
+  persistent_workers: false
+  pin_memory: true
+  prefetch_factor: 2

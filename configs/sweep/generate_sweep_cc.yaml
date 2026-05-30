@@ -1,0 +1,71 @@
+program: src/generate_samples.py
+
+method: grid
+
+metric:
+  goal: maximize
+  name: generation/valid_rate
+
+parameters:
+
+  hydra.run.dir:
+    value: "logs/sweep/run_${now:%Y-%m-%d}/cc_${conditional_generation.cat_class.value}"
+
+  seed:
+    value: 42
+
+  ckpt_path:
+    value: ""
+
+  # Sampling settings
+  ++sampling.dataset:
+    value: "both"
+
+  ++sampling.num_samples:
+    value: 500
+
+  ++sampling.batch_size:
+    value: 100
+
+  ++sampling.cfg_scale:
+    value: 2.0
+
+  ++sampling.visualize:
+    value: true
+
+  ++sampling.save_dir:
+    value: "${hydra:runtime.output_dir}/generated"
+
+  ++sampling.compute_novelty:
+    value: false
+
+  # Conditional generation - ads_id sweep
+  ++conditional_generation.ads_id.use:
+    value: false
+
+  ++conditional_generation.binding_energy.use:
+    value: false
+
+  ++conditional_generation.cat_class.use:
+    value: true
+
+  ++conditional_generation.cat_class.value:
+    values: [0, 1, 2, 3, 4]
+
+  # Logger
+  name:
+    value: "sweep@${conditional_generation.cat_class.value}"
+
+  ++logger.wandb.project:
+    value: "CatDiT-sweep"
+
+  ++logger.wandb.name:
+    value: "CC@${conditional_generation.cat_class.value}"
+
+command:
+  - ${env}
+  - HYDRA_FULL_ERROR=1
+  - WANDB_START_METHOD=thread
+  - python
+  - ${program}
+  - ${args_no_hyphens}

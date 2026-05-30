@@ -1,0 +1,63 @@
+_target_: src.models.ldm_module.LatentDiffusionLitModule
+
+autoencoder_ckpt: "/workspace/models/vae/VAE-L.ckpt"  # path to VAE checkpoint
+
+denoiser:
+  _target_: src.models.denoisers.dit.DiT
+  d_x: 12
+  d_model: 1024    # 384, 768, 1024
+  nhead: 16        # 6, 12, 16
+  num_layers: 24  # 12, 24
+  num_ads: 82
+  num_cat_classes: 5
+
+interpolant:
+  _target_: src.models.interpolants.flow_matching.FlowMatchingInterpolant
+  min_t: 1e-2
+  corrupt: True
+  num_timesteps: 100
+  self_condition: true
+  self_condition_prob: 0.8
+
+sampling:
+  dataset: "oc20"  # "oc20", "oc22", or "both"
+  cfg_scale: 2.0
+  num_samples: 10
+  batch_size: 100
+  data_dir: ${paths.data_dir}
+  visualize: true
+  save_dir: ${paths.viz_dir}
+  compute_novelty: false
+
+# value should be `null` during training! Designate the value only for inference!
+conditional_generation:
+  binding_energy:   # (float) -9.983~9.999
+    use: False
+    value: null
+  ads_id:   # (int) 0~84, (see src/data/components/adsorbate_mapping.py)
+    use: False
+    value: null
+  cat_class:   # (int) 0~4
+    use: False
+    value: null
+  # Warmup: gradually increase condition scale from 0 to 1 over warmup_epochs
+  # Set to 0 to disable warmup (default behavior)
+  # Recommended: 20 epochs (20% of 100 epoch training) for fine-tuning
+  warmup_epochs: 10
+
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  lr: 0.00001
+  weight_decay: 0.001
+
+scheduler: null
+  # _target_: torch.optim.lr_scheduler.CosineAnnealingLR
+  # _partial_: true
+  # T_max: ${trainer.max_epochs}
+  # eta_min: 0.00001
+
+scheduler_frequency: 1
+
+# compile model for faster training with pytorch 2.0
+compile: false

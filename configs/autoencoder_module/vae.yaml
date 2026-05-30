@@ -1,0 +1,52 @@
+_target_: src.models.vae_module.VariationalAutoencoderLitModule
+
+encoder: ${encoder}
+decoder: ${decoder}
+
+latent_dim: 12
+
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  lr: 0.0001
+  weight_decay: 0.001
+
+scheduler: null
+
+scheduler_frequency: ${trainer.check_val_every_n_epoch}
+
+loss_weights:
+  loss_atom_types:
+    oc20: 1.0
+    oc22: 1.0
+
+  loss_tags:
+    oc20: 1.0
+    oc22: 1.0
+
+  loss_lengths:
+    oc20: 5.0
+    oc22: 5.0
+
+  loss_angles:
+    oc20: 10.0
+    oc22: 10.0
+
+  loss_frac_coords:
+    oc20: 10.0
+    oc22: 10.0
+
+  loss_pos:
+    oc20: 0.0
+    oc22: 0.0
+
+  loss_kl:
+    oc20: 0.00001
+    oc22: 0.00001
+
+visualization:
+  visualize: true
+  save_dir: ${paths.viz_dir}/
+
+# compile model for faster training with pytorch 2.0
+compile: false
