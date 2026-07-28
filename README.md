@@ -1,5 +1,5 @@
 # Catalyst Diffusion Transformer (CatDiT)
-<!-- [![arXiv](https://img.shields.io/badge/PDF-arXiv-blue)](링크크) -->
+[![arXiv](https://img.shields.io/badge/PDF-arXiv-blue)](https://arxiv.org/abs/2607.24272)
 [![Code](https://img.shields.io/badge/Code-GitHub-red)](https://github.com/doouv/CatDiT.git)
 [![Weights](https://img.shields.io/badge/Weights-HuggingFace-yellow)](https://huggingface.co/doouv/catalyst-diffusion-transformer)
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/doouv/CatDiT/blob/main/notebooks/catdit_demo.ipynb)
@@ -142,8 +142,23 @@ wandb agent <your-entity>/<project>/<sweep_id>
 
 ## Citation
 
-<!-- TODO -->
+If you use CatDiT in your research, please cite our paper:
 
-## License
+> Hayoung Doo, Dong Hyeon Mok, Seoin Back, and Jonggeol Na.
+> **Catalyst Diffusion Transformer: Generative Inverse Design of Heterogeneous Catalysts.**
+> arXiv preprint arXiv:2607.24272, 2026.
 
-<!-- TODO -->
+```bibtex
+@article{doo2026catdit,
+  title         = {Catalyst Diffusion Transformer: Generative Inverse Design of Heterogeneous Catalysts},
+  author        = {Doo, Hayoung and Mok, Dong Hyeon and Back, Seoin and Na, Jonggeol},
+  journal       = {arXiv preprint arXiv:2607.24272},
+  year          = {2026},
+  eprint        = {2607.24272},
+  archivePrefix = {arXiv},
+  primaryClass  = {cond-mat.mtrl-sci},
+  doi           = {10.48550/arXiv.2607.24272},
+  url           = {https://arxiv.org/abs/2607.24272}
+}
+```
+
