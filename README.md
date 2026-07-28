@@ -149,16 +149,14 @@ If you use CatDiT in your research, please cite our paper:
 > arXiv preprint arXiv:2607.24272, 2026.
 
 ```bibtex
-@article{doo2026catdit,
-  title         = {Catalyst Diffusion Transformer: Generative Inverse Design of Heterogeneous Catalysts},
-  author        = {Doo, Hayoung and Mok, Dong Hyeon and Back, Seoin and Na, Jonggeol},
-  journal       = {arXiv preprint arXiv:2607.24272},
-  year          = {2026},
-  eprint        = {2607.24272},
-  archivePrefix = {arXiv},
-  primaryClass  = {cond-mat.mtrl-sci},
-  doi           = {10.48550/arXiv.2607.24272},
-  url           = {https://arxiv.org/abs/2607.24272}
+@misc{doo2026catalystdiffusiontransformergenerative,
+      title={Catalyst Diffusion Transformer: Generative Inverse Design of Heterogeneous Catalysts}, 
+      author={Hayoung Doo and Dong Hyeon Mok and Seoin Back and Jonggeol Na},
+      year={2026},
+      eprint={2607.24272},
+      archivePrefix={arXiv},
+      primaryClass={cond-mat.mtrl-sci},
+      url={https://arxiv.org/abs/2607.24272}, 
 }
 ```
 
